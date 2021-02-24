@@ -1,0 +1,22 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+../include/Vector3d.h
+stdio.h
+-
+math.h
+-
+complex.h
+-
+stdlib.h
+-
+
+C:/Users/Diablo/CLionProjects/untitled/Sources/main.c
+Vector3d.h
+-
+

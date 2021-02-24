@@ -1,0 +1,3 @@
+C:/Users/Diablo/CLionProjects/untitled/cmake-build-debug-mingw/CMakeFiles/Vertex.dir
+C:/Users/Diablo/CLionProjects/untitled/cmake-build-debug-mingw/CMakeFiles/edit_cache.dir
+C:/Users/Diablo/CLionProjects/untitled/cmake-build-debug-mingw/CMakeFiles/rebuild_cache.dir
