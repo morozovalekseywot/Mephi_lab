@@ -1,246 +1,212 @@
-#include <Vector3d.h>
-#define Begin_Complex                                            \
-    Vertex *vec = (Vertex *)malloc(sizeof(double _Complex) * 3); \
-    (*vec).x = malloc(sizeof(double _Complex));                  \
-    (*vec).y = malloc(sizeof(double _Complex));                  \
-    (*vec).z = malloc(sizeof(double _Complex));                  \
-    Vertex *V_a = (Vertex *)a;                                   \
-    Vertex *V_b = (Vertex *)b
+#include "../include/Vector3d.h"
 
-#define Begin_double                                    \
-    Vertex *vec = (Vertex *)malloc(sizeof(double) * 3); \
-    (*vec).x = malloc(sizeof(double));                  \
-    (*vec).y = malloc(sizeof(double));                  \
-    (*vec).z = malloc(sizeof(double));                  \
-    Vertex *V_a = (Vertex *)a;                          \
-    Vertex *V_b = (Vertex *)b
+#define gc(a, x) *(double _Complex *)((*a).x)
+#define gd(a, x) *(double *)((*a).x)
 
-#define gc(V_a, x) *(double _Complex *)((*V_a).x)
-#define gd(V_a, x) *(double *)((*V_a).x)
-#define grc(V_a, x) *(_C_double_complex *)((*V_a).x)
+#define func_Complex(name)  name->sum = sum_Complex; \
+                            name->diff = diff_Complex; \
+                            name->cross = cross_Complex; \
+                            name->dot = dot_Complex;  \
+                            name->divide = divide_Complex; \
+                            name->scan = scan_Complex
+
+#define func_double(name)  name->sum = sum_double; \
+                            name->diff = diff_double; \
+                            name->cross = cross_double; \
+                            name->dot = dot_double; \
+                            name->divide = divide_double; \
+                            name->scan = scan_double
+
 Vertex *create_Complex()
 {
-    Vertex *vec = (Vertex *)malloc(sizeof(double _Complex) * 3);
+    Vertex *vec = (Vertex *) malloc(sizeof(Vertex));
     (*vec).x = malloc(sizeof(double _Complex));
     (*vec).y = malloc(sizeof(double _Complex));
     (*vec).z = malloc(sizeof(double _Complex));
+    func_Complex(vec);
     return vec;
 }
+
 Vertex *create_double()
 {
-    Vertex *vec = (Vertex *)malloc(sizeof(double) * 3);
+    Vertex *vec = (Vertex *) malloc(sizeof(Vertex));
     (*vec).x = malloc(sizeof(double));
     (*vec).y = malloc(sizeof(double));
     (*vec).z = malloc(sizeof(double));
+    func_double(vec);
     return vec;
 }
-/// сумма векторов
-void *sum_Complex(void *a, void *b)
+
+/// сумма
+Vertex *sum_Complex(Vertex *a, Vertex *b)
 {
-    Begin_Complex;
-    *(double _Complex *)vec->x = (*(double _Complex *)((*V_a).x) + *(double _Complex *)((*V_b).x));
-    *(double _Complex *)vec->y = (*(double _Complex *)((*V_a).y) + *(double _Complex *)((*V_b).y));
-    *(double _Complex *)vec->z = (*(double _Complex *)((*V_a).z) + *(double _Complex *)((*V_b).z));
+    Vertex *vec = create_Complex();
+    *(double _Complex *) vec->x = (*(double _Complex *) ((*a).x) + *(double _Complex *) ((*b).x));
+    *(double _Complex *) vec->y = (*(double _Complex *) ((*a).y) + *(double _Complex *) ((*b).y));
+    *(double _Complex *) vec->z = (*(double _Complex *) ((*a).z) + *(double _Complex *) ((*b).z));
     return vec;
 }
-/// сумма векторов
-void *sum_double(void *a, void *b)
+
+/// сумма
+Vertex *sum_double(Vertex *a, Vertex *b)
 {
-    Begin_double;
-    *(double *)vec->x = (*(double *)((*V_a).x) + *(double *)((*V_b).x));
-    *(double *)vec->y = (*(double *)((*V_a).y) + *(double *)((*V_b).y));
-    *(double *)vec->z = (*(double *)((*V_a).z) + *(double *)((*V_b).z));
+    Vertex *vec = create_double();
+    *(double *) vec->x = (*(double *) ((*a).x) + *(double *) ((*b).x));
+    *(double *) vec->y = (*(double *) ((*a).y) + *(double *) ((*b).y));
+    *(double *) vec->z = (*(double *) ((*a).z) + *(double *) ((*b).z));
     return vec;
 }
-/// разность векторов
-void *diff_Complex(void *a, void *b)
+
+/// разность
+Vertex *diff_Complex(Vertex *a, Vertex *b)
 {
-    Begin_Complex;
-    *(double _Complex *)vec->x = (*(double _Complex *)((*V_a).x) - *(double _Complex *)((*V_b).x));
-    *(double _Complex *)vec->y = (*(double _Complex *)((*V_a).y) - *(double _Complex *)((*V_b).y));
-    *(double _Complex *)vec->z = (*(double _Complex *)((*V_a).z) - *(double _Complex *)((*V_b).z));
+    Vertex *vec = create_Complex();
+    *(double _Complex *) vec->x = (*(double _Complex *) ((*a).x) - *(double _Complex *) ((*b).x));
+    *(double _Complex *) vec->y = (*(double _Complex *) ((*a).y) - *(double _Complex *) ((*b).y));
+    *(double _Complex *) vec->z = (*(double _Complex *) ((*a).z) - *(double _Complex *) ((*b).z));
     return vec;
 }
-/// разность векторов
-void *diff_double(void *a, void *b)
+
+/// разность
+Vertex *diff_double(Vertex *a, Vertex *b)
 {
-    Begin_double;
-    *(double *)vec->x = (*(double *)((*V_a).x) - *(double *)((*V_b).x));
-    *(double *)vec->y = (*(double *)((*V_a).y) - *(double *)((*V_b).y));
-    *(double *)vec->z = (*(double *)((*V_a).z) - *(double *)((*V_b).z));
+    Vertex *vec = create_double();
+    *(double *) vec->x = (*(double *) ((*a).x) - *(double *) ((*b).x));
+    *(double *) vec->y = (*(double *) ((*a).y) - *(double *) ((*b).y));
+    *(double *) vec->z = (*(double *) ((*a).z) - *(double *) ((*b).z));
     return vec;
 }
+
 /// скалярное произведение
-void *scalar_Complex(void *a, void *b)
+double complex scalar_Complex(Vertex *a, Vertex *b)
 {
-    Begin_Complex;
-    double _Complex *res = (double _Complex *)malloc(sizeof(double _Complex));
-    res[0] = gc(V_a, x) * gc(V_b, x) + gc(V_a, y) * gc(V_b, y) + gc(V_a, z) * gc(V_b, z);
+    double complex res = gc(a, x) * gc(b, x) + gc(a, y) * gc(b, y) + gc(a, z) * gc(b, z);
     return res;
 }
+
 /// скалярное произведение
-void *scalar_double(void *a, void *b)
+double scalar_double(Vertex *a, Vertex *b)
 {
-    Begin_double;
-    double *res = (double *)malloc(sizeof(double));
-    res[0] = gd(V_a, x) * gd(V_b, x) + gd(V_a, y) * gd(V_b, y) + gd(V_a, z) * gd(V_b, z);
+    double res = gd(a, x) * gd(b, x) + gd(a, y) * gd(b, y) + gd(a, z) * gd(b, z);
     return res;
 }
+
+/// векторное произведение
+Vertex *cross_Complex(Vertex *a, Vertex *b)
+{
+    Vertex *vec = create_Complex();
+    gc(vec, x) = gc(a, y) * gc(b, z) - gc(a, z) * gc(b, y);
+    gc(vec, y) = -gc(a, x) * gc(b, z) + gc(a, z) * gc(b, x);
+    gc(vec, z) = gc(a, x) * gc(b, y) - gc(a, y) * gc(a, x);
+    return vec;
+}
+
+/// векторное произведение
+Vertex *cross_double(Vertex *a, Vertex *b)
+{
+    Vertex *vec = create_double();
+    gd(vec, x) = gd(a, y) * gd(b, z) - gd(a, z) * gd(b, y);
+    gd(vec, y) = -gd(a, x) * gd(b, z) + gd(a, z) * gd(b, x);
+    gd(vec, z) = gd(a, x) * gd(b, y) - gd(a, y) * gd(a, x);
+    return vec;
+}
+
 /// модуль вектора
-double *mod_Complex(void *a)
+double mod_double(Vertex *a)
 {
-    Vertex *V_a = (Vertex *)a;
-    double *res = (double *)malloc(sizeof(double));
-    res[0] = sqrt(cabs(gc(V_a, x)) * cabs(gc(V_a, x)) + cabs(gc(V_a, y)) * cabs(gc(V_a, y)) + cabs(gc(V_a, z)) * cabs(gc(V_a, z)));
+    double res = sqrt(gd(a, x) * gd(a, x) + gd(a, y) * gd(a, y) + gd(a, z) * gd(a, z));
     return res;
-    //https://docs.microsoft.com/ru-ru/cpp/c-runtime-library/complex-math-support?view=msvc-160
 }
+
 /// модуль вектора
-double *mod_double(void *a)
+double mod_Complex(Vertex *a)
 {
-    Vertex *V_a = (Vertex *)a;
-    double *res = (double *)malloc(sizeof(double));
-    res[0] = sqrt(gd(V_a, x) * gd(V_a, x) + gd(V_a, y) * gd(V_a, y) + gd(V_a, z) * gd(V_a, z));
+    double res = sqrt(cabs(gc(a, x)) * cabs(gc(a, x)) + cabs(gc(a, y)) * cabs(gc(a, y)) + cabs(gc(a, z)) * cabs(gc(a, z)));
     return res;
 }
-/// делает вектор единичным
-void *normalize_Complex(void *a)
-{
-    double len = *mod_Complex(a);
-    Vertex *V_a = (Vertex *)a;
-    if (len > 0.0)
-    {
-        gc(V_a, x) /= len;
-        gc(V_a, y) /= len;
-        gc(V_a, z) /= len;
-    }
-    return a;
-}
-/// делает вектор единичным
-void *normalize_double(void *a)
-{
-    double len = *mod_double(a);
-    Vertex *V_a = (Vertex *)a;
-    if (len > 0.0)
-    {
-        gd(V_a, x) /= len;
-        gd(V_a, y) /= len;
-        gd(V_a, z) /= len;
-    }
-    return a;
-}
+
 /// умножение вектора на число
-void *dot_Complex(void *vec, double c)
+Vertex *dot_Complex(Vertex *vec, double c)
 {
-    Vertex *V_vec = (Vertex *)vec;
-    gc(V_vec, x) *= c;
-    gc(V_vec, y) *= c;
-    gc(V_vec, z) *= c;
+    Vertex *V_vec = create_Complex();
+    gc(V_vec, x) = gc(vec, x) * c;
+    gc(V_vec, y) = gc(vec, y) * c;
+    gc(V_vec, z) = gc(vec, z) * c;
     return V_vec;
 }
+
 /// умножение вектора на число
-void *dot_double(void *vec, double c)
+Vertex *dot_double(Vertex *vec, double c)
 {
-    Vertex *V_vec = (Vertex *)vec;
-    gd(V_vec, x) *= c;
-    gd(V_vec, y) *= c;
-    gd(V_vec, z) *= c;
+    Vertex *V_vec = create_double();
+    gd(V_vec, x) = gd(vec, x) * c;
+    gd(V_vec, y) = gd(vec, y) * c;
+    gd(V_vec, z) = gd(vec, z) * c;
     return V_vec;
 }
+
 /// деление вектора на число
-void *divide_Complex(void *vec, double c)
+Vertex *divide_Complex(Vertex *vec, double c)
 {
-    Vertex *V_vec = (Vertex *)vec;
-    gc(V_vec, x) /= c;
-    gc(V_vec, y) /= c;
-    gc(V_vec, z) /= c;
+    Vertex *V_vec = create_Complex();
+    gc(V_vec, x) = gc(vec, x) / c;
+    gc(V_vec, y) = gc(vec, y) / c;
+    gc(V_vec, z) = gc(vec, z) / c;
     return V_vec;
 }
-/// умножение вектора на число
-void *divide_double(void *vec, double c)
+
+/// деление вектора на число
+Vertex *divide_double(Vertex *vec, double c)
 {
-    Vertex *V_vec = (Vertex *)vec;
-    gd(V_vec, x) /= c;
-    gd(V_vec, y) /= c;
-    gd(V_vec, z) /= c;
+    Vertex *V_vec = create_double();
+    gd(V_vec, x) = gd(vec, x) / c;
+    gd(V_vec, y) = gd(vec, y) / c;
+    gd(V_vec, z) = gd(vec, z) / c;
     return V_vec;
 }
-/// разворот вектора
-void *reverse_Complex(void *a)
-{
-    Vertex *V_a = (Vertex *)a;
-    gc(V_a, x) = -gc(V_a, x);
-    gc(V_a, y) = -gc(V_a, y);
-    gc(V_a, z) = -gc(V_a, z);
-    return V_a;
-}
-/// разворот вектора
-void *reverse_double(void *a)
-{
-    Vertex *V_a = (Vertex *)a;
-    gd(V_a, x) = -gd(V_a, x);
-    gd(V_a, y) = -gd(V_a, y);
-    gd(V_a, z) = -gd(V_a, z);
-    return V_a;
-}
-/// векторное произведение
-void *cross_Complex(void *a, void *b)
-{
-    Begin_Complex;
-    gc(vec, x) = gc(V_a, y) * gc(V_b, z) - gc(V_a, z) * gc(V_b, y);
-    gc(vec, y) = -gc(V_a, x) * gc(V_b, z) + gc(V_a, z) * gc(V_b, x);
-    gc(vec, z) = gc(V_a, x) * gc(V_b, y) - gc(V_a, y) * gc(V_a, x);
-    return vec;
-}
-/// векторное произведение
-void *cross_double(void *a, void *b)
-{
-    Begin_double;
-    gd(vec, x) = gd(V_a, y) * gd(V_b, z) - gd(V_a, z) * gd(V_b, y);
-    gd(vec, y) = -gd(V_a, x) * gd(V_b, z) + gd(V_a, z) * gd(V_b, x);
-    gd(vec, z) = gd(V_a, x) * gd(V_b, y) - gd(V_a, y) * gd(V_a, x);
-    return vec;
-}
+
 /// вывод вектора
 void print_Complex(Vertex *a)
 {
     printf("{%.3f %+.3fi, %.3f %+.3fi, %.3f %+.3fi}\n", creal(gc(a, x)), cimag(gc(a, x)), creal(gc(a, y)), cimag(gc(a, y)), creal(gc(a, z)), cimag(gc(a, z)));
 }
+
 void print_double(Vertex *a)
 {
-    printf("{%.3f, %.3f, %.3f}\n", *(double *)(*a).x, *(double *)(*a).y, *(double *)(*a).z);
+    printf("{%.3f, %.3f, %.3f}\n", gd(a, x), gd(a, y), gd(a, z));
 }
+
 /// ввод вектора
-void *scan_Complex()
+Vertex *scan_Complex()
 {
     Vertex *t = create_Complex();
-    (*t).x = malloc(sizeof(double _Complex));
-    (*t).y = malloc(sizeof(double _Complex));
-    (*t).z = malloc(sizeof(double _Complex));
     double a, b;
-    //double _Complex *res;
     scanf("%lf%lf", &a, &b);
-    //*(_C_double_complex *)((*t).x) = _Cbuild(a, b);
     gc(t, x) = a + b * I;
     scanf("%lf%lf", &a, &b);
     gc(t, y) = a + b * I;
-    //*(_C_double_complex *)((*t).y) = _Cbuild(a, b);
     scanf("%lf%lf", &a, &b);
     gc(t, z) = a + b * I;
-    //*(_C_double_complex *)((*t).z) = _Cbuild(a, b);
     return t;
 }
+
 /// ввод вектора
-void *scan_double()
+Vertex *scan_double()
 {
     Vertex *t = create_double();
-    (*t).x = malloc(sizeof(double));
-    (*t).y = malloc(sizeof(double));
-    (*t).z = malloc(sizeof(double));
     double a, b, c;
     scanf("%lf%lf%lf", &a, &b, &c);
     gd(t, x) = a;
     gd(t, y) = b;
     gd(t, z) = c;
     return t;
+}
+
+/// чищу память
+void deleteVertex(Vertex *a)
+{
+    free(a->x);
+    free(a->y);
+    free(a->z);
+    free(a);
 }
