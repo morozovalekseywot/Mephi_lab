@@ -1,16 +1,12 @@
-set(CMAKE_C_COMPILER "C:/minigw64/mingw64/bin/cmd.exe")
-cmake_minimum_required(VERSION 3.17)
+cmake_minimum_required(VERSION 3.19)
+project(Vertex C)
 
-project(Vertex)
+set(CMAKE_C_STANDARD 11)
 
 include_directories(include)
-set(CMAKE_C_STANDARD 99)
-set(HEADERS
-        include/Vector3d.h)
 
-set(SOURCES
+add_executable(Vertex
+        include/Vector3d.h
+        Sources/main.c
         Sources/Vector3d.c
-        Sources/main.c)
-
-add_executable(${CMAKE_PROJECT_NAME} ${HEADERS} ${SOURCES})
-#add_library(include/Vector3d.h Sources/Vector3d.c)
+        Sources/Test.c)
