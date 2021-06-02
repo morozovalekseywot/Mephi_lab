@@ -1,3 +1,0 @@
-"C:\Program Files\JetBrains\CLion 2020.3\bin\cmake\win\bin\cmake.exe" -E rm -f CMakeFiles\Vertex.dir/objects.a
-C:\minigw64\mingw64\bin\ar.exe cr CMakeFiles\Vertex.dir/objects.a @CMakeFiles\Vertex.dir\objects1.rsp
-C:\minigw64\mingw64\bin\gcc.exe -g   -Wl,--whole-archive CMakeFiles\Vertex.dir/objects.a -Wl,--no-whole-archive  -o Vertex.exe -Wl,--out-implib,libVertex.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\Vertex.dir\linklibs.rsp
